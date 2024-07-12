@@ -2,10 +2,10 @@ import { Header } from './Component/Header/Header.jsx';
 import { Footer } from './Component/Footer/Footer.jsx';
 import './App.css';
 import './EnchereHome.css';
-import {Button, FormControlLabel, Input, InputAdornment, InputLabel, Select, MenuItem} from "@mui/material";
+import {Button, Input, InputAdornment, InputLabel, Select, MenuItem} from "@mui/material";
 import {useState} from "react";
 import SearchIcon from '@mui/icons-material/Search';
-import {Auction} from "./Component/Auction/Auction.jsx";
+import {AuctionList} from "./Component/Auction/AuctionList.jsx";
 import {BidAPI} from "./BidsAPI.jsx";
 
 function App(){
@@ -13,7 +13,6 @@ function App(){
 
     return (
         <div className="App">
-            <BidAPI />
             <Header />
             <main>
                 <div className={"search"}>
@@ -50,8 +49,8 @@ function App(){
                         <Button className="button" variant="contained">Rechercher</Button>
                     </div>
                 </div>
-                <div className={"column row-left"}>
-                    <Auction/>
+                <div className={"flex-box"}>
+                    <AuctionList/>
                 </div>
                 <div className={"column column-right"}>
                 </div>
