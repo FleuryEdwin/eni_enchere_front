@@ -1,0 +1,44 @@
+main {
+    flex: 1;
+    padding: 40px 20px 20px;
+    margin-top: 60px;
+}
+
+.form-container {
+    display: flex;
+    justify-content: center;
+}
+
+.register-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 175px;
+    width: 100%;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.container-input {
+    margin-bottom: 20px;
+}
+
+.input {
+    width: 300px;
+}
+
+.button{
+    width: 200px;
+    height: 50px;
+}
+
+.container-button-confirm{
+    padding-left: 50px;
+}
+
+.container-button-cancel{
+    padding-right: 50px;
+}

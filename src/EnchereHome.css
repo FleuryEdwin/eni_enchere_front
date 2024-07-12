@@ -1,0 +1,23 @@
+.column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 175px;
+    width: 100%;
+}
+
+.select-categorie{
+    padding-bottom: 20px;
+}
+
+.searchBar{
+    padding-top: 20px;
+}
+
+.select{
+    width: 300px;
+}
+
+.searchBar{
+    padding-bottom: 20px;
+    
+}
