@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import ErrorPage from "./ErrorPage.jsx";
-import Login from "./LoginPage/Login.jsx";
+import {Login} from "./LoginPage/Login.jsx";
 import './index.css'
 import {
     createBrowserRouter,
@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 import {Register} from "./RegisterPage/Register.jsx";
 import {Home} from "./Home/Home.jsx";
+import {ProductDetails} from "./Component/Products/ProductDetails.jsx";
 
 const router = createBrowserRouter([
     {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
                path: "auth/register",
                element: <Register /> ,
             },
+            {
+                path:"bids/:id",
+                element: <ProductDetails/>
+            }
         ],
     },
 ]);
