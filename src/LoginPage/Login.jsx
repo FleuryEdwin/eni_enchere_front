@@ -1,12 +1,14 @@
 import './Login.css'
 import {useState} from "react";
 import {Button, Checkbox, FormControlLabel, TextField} from "@mui/material";
-import {Link} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-export function Login(){
-    const [email, setEmail] = useState("")
 
-    const [password, setPassword] = useState("")
+
+export function Login() {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const navigate = useNavigate();
     const handleSubmit = async (event) => {
         event.preventDefault();
 
@@ -25,11 +27,14 @@ export function Login(){
             });
 
             if (response.ok) {
-                // Appel de l'API
                 const data = await response.json();
                 console.log("Connexion réussie :", data);
-                //TODO stocker le jeton d'authentification ou effectuez d'autres actions nécessaires
 
+                // Stockez le jeton d'authentification dans localStorage
+                localStorage.setItem("authToken", data.token);
+
+                // Redirigez vers la page d'accueil
+                navigate("/");
             } else {
                 console.error("Échec de la connexion");
             }

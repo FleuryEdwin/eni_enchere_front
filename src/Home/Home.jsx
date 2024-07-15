@@ -1,12 +1,20 @@
 import './Home.css';
 import '../EnchereHome.css';
 import {Button, Input, InputAdornment, InputLabel, Select, MenuItem} from "@mui/material";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import SearchIcon from '@mui/icons-material/Search';
-import {AuctionList} from "../Component/Auction/AuctionList.jsx";
+import {ProductList} from "../Component/Products/ProductList.jsx";
 
 export function Home(){
-    const [category, setCategory] = useState('Toutes');
+    const [categories, setCategories] = useState([]);
+    const [selectedCategory, setSelectedCategory] = useState('Toutes');
+
+    useEffect(() => {
+        fetch('http://localhost:8080/categories').then(response => response.json()).then(data => {
+            console.log(data)
+            setCategories(data);
+        }).catch(error => console.error('Error fetching categories:', error));
+    }, []);
 
     return (
         <div className="App">
@@ -29,16 +37,14 @@ export function Home(){
                     <div className={"select-categorie"}>
                         <Select
                             id={"select-categorie"}
-                            value={category}
-
+                            value={selectedCategory}
                             className={"select"}
-                            onChange={event => setCategory(event.target.value)}
+                            onChange={event => setSelectedCategory(event.target.value)}
                         >
                             <MenuItem value={""}>Toutes</MenuItem>
-                            <MenuItem value={"informatique"}>Informatique</MenuItem>
-                            <MenuItem value={"furnishings"}>Ameublement</MenuItem>
-                            <MenuItem value={"clothes"}>Vêtement</MenuItem>
-                            <MenuItem value={"sport"}>Sport&Loisirs</MenuItem>
+                            {categories.map(cat => (
+                                <MenuItem key={cat.id} value={cat.label}>{cat.label}</MenuItem>
+                            ))}
                         </Select>
                     </div>
                     <div className={"container-button-search"}>
@@ -46,7 +52,7 @@ export function Home(){
                     </div>
                 </div>
                 <div className={"flex-box"}>
-                    <AuctionList/>
+                    <ProductList/>
                 </div>
                 <div className={"column column-right"}>
                 </div>
