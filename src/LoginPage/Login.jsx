@@ -3,9 +3,6 @@ import {useState} from "react";
 import {Button, Checkbox, FormControlLabel, TextField} from "@mui/material";
 import {Link} from "react-router-dom";
 
-
-
-
 export function Login(){
     const [email, setEmail] = useState("")
 
@@ -69,7 +66,7 @@ export function Login(){
                         <FormControlLabel className="checkBox" control={<Checkbox/>} label="Se souvenir de moi"/>
                     </div>
                     <div className={"create-account-container"}>
-                        <Button className="create-account-button" variant="contained">Créer un compte</Button>
+                        <Button className="create-account-button" variant="contained" component={Link} to="/auth/signup">Créer un compte</Button>
                     </div>
                 </form>
             </main>

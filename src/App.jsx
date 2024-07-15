@@ -23,45 +23,7 @@ function App() {
         <div className="App">
             <Header/>
             <main>
-                <div className={"search"}>
-                    <h2>Liste des enchères</h2>
-                    <div className={"searchBar"}>
-                        <InputLabel htmlFor="outlined-basic">
-                            Filtres
-                        </InputLabel>
-                        <Input
-                            id="outlined-basic"
-                            startAdornment={
-                                <InputAdornment position="start">
-                                    <SearchIcon/>
-                                </InputAdornment>
-                            }
-                        />
-                    </div>
-                    <div className={"select-categorie"}>
-                        <Select
-                            id={"select-categorie"}
-                            value={selectedCategory}
-                            className={"select"}
-                            onChange={event => setSelectedCategory(event.target.value)}
-                        >
-                            <MenuItem value={""}>Toutes</MenuItem>
-                            {categories.map(cat => (
-                                <MenuItem key={cat.id} value={cat.label}>{cat.label}</MenuItem>
-                            ))}
-                        </Select>
-                    </div>
-                    <div className={"container-button-search"}>
-                        <Button className="button" variant="contained">Rechercher</Button>
-                    </div>
-                </div>
-                <div className={"flex-box"}>
-                    <AuctionList/>
-                </div>
-                <div className={"column column-right"}>
-                </div>
                 <Outlet/>
-
             </main>
             <Footer/>
         </div>

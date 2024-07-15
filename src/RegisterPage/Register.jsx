@@ -1,33 +1,80 @@
 import './Register.css';
 import {Button, FormControlLabel, TextField} from "@mui/material";
 import {useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 export function Register(){
-    const[pseudo, setPseudo] = useState("")
+    const[userName, setUsername] = useState("")
     const[firstName, setFirstName] = useState("")
     const[phone, setPhone] = useState("")
     const[postalCode, setPostalCode] = useState("")
     const[password, setPassword] = useState("")
-    const[lastName, setLastName] = useState("")
+    const[familyName, setFamilyName] = useState("")
     const[email, setEmail] = useState("")
     const[address, setAddress] = useState("")
     const[city, setCity] = useState("")
     const[confirmPassword, setConfirmPassword] = useState("")
+    const country = "test"
+
+    const navigate = useNavigate()
+
+    function isLoggedIn() {
+        return localStorage.getItem('authToken') !== null;
+    }
+
+    const handleSubmit = async (event) => {
+        event.preventDefault()
+
+        const userData = {
+            userName,
+            firstName,
+            familyName,
+            email,
+            phone,
+            address,
+            postalCode,
+            city,
+            password,
+            country,
+        }
+
+        console.log(userData)
+
+        try {
+            const response = await fetch("http://localhost:8080/auth/signup", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(userData),
+            });
+            if (response.ok) {
+                // Traitez la réponse de l'API ici, par exemple :
+                console.log("Utilisateur enregistré avec succès");
+                console.log(isLoggedIn())
+                navigate("/")
+            } else {
+                console.error("Échec de l'enregistrement de l'utilisateur");
+            }
+        } catch (error) {
+            console.error("Erreur lors de l'enregistrement de l'utilisateur :", error);
+        }
+    }
 
     return (
         <div className="App">
             <main>
                 <h2>Mon Profil</h2>
                 <div className="form-container">
-                    <form className="register-form" onSubmit="">
+                    <form className="register-form" onSubmit={handleSubmit}>
                         <div className="column column-left">
                             <div className={"container-input"}>
                                 <TextField
                                     id="outlined-basic"
                                     className="input"
                                     label="Pseudo :"
-                                    value={pseudo}
-                                    onChange={event => setPseudo(event.target.value)}
+                                    value={userName}
+                                    onChange={event => setUsername(event.target.value)}
                                 />
                             </div>
                             <div className={"container-input"}>
@@ -68,7 +115,13 @@ export function Register(){
                                 />
                             </div>
                             <div className={"container-button-confirm"}>
-                                <Button className="button" variant="contained">Confirmer</Button>
+                                <Button
+                                    className="button"
+                                    variant="contained"
+                                    onClick={handleSubmit}
+                                >
+                                    Confirmer
+                                </Button>
                             </div>
                         </div>
                         <div className="column column-right">
@@ -77,8 +130,8 @@ export function Register(){
                                     id="outlined-basic"
                                     className="input"
                                     label="Nom :"
-                                    value={lastName}
-                                    onChange={event => setLastName(event.target.value)}
+                                    value={familyName}
+                                    onChange={event => setFamilyName(event.target.value)}
                                 />
                             </div>
                             <div className={"container-input"}>
