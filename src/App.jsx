@@ -3,20 +3,27 @@ import { Footer } from './Component/Footer/Footer.jsx';
 import './App.css';
 import './EnchereHome.css';
 import {Button, Input, InputAdornment, InputLabel, Select, MenuItem} from "@mui/material";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import SearchIcon from '@mui/icons-material/Search';
 import {AuctionList} from "./Component/Auction/AuctionList.jsx";
-import {BidAPI} from "./BidsAPI.jsx";
 
 function App(){
-    const [category, setCategory] = useState('Toutes');
+    const [categories, setCategories] = useState([]);
+    const [selectedCategory, setSelectedCategory] = useState('Toutes');
+
+    useEffect(()=> {
+        fetch('http://localhost:8080/categories').then(response => response.json()).then(data => {
+            console.log(data)
+            setCategories(data);
+        }).catch(error => console.error('Error fetching categories:', error));
+    }, []);
 
     return (
         <div className="App">
             <Header />
             <main>
                 <div className={"search"}>
-                <h2>Liste des enchères</h2>
+                    <h2>Liste des enchères</h2>
                     <div className={"searchBar"}>
                         <InputLabel htmlFor="outlined-basic">
                             Filtres
@@ -33,16 +40,14 @@ function App(){
                     <div className={"select-categorie"}>
                         <Select
                             id={"select-categorie"}
-                            value={category}
-
+                            value={selectedCategory}
                             className={"select"}
-                            onChange={event => setCategory(event.target.value)}
+                            onChange={event => setSelectedCategory(event.target.value)}
                         >
                             <MenuItem value={""}>Toutes</MenuItem>
-                            <MenuItem value={"informatique"}>Informatique</MenuItem>
-                            <MenuItem value={"furnishings"}>Ameublement</MenuItem>
-                            <MenuItem value={"clothes"}>Vêtement</MenuItem>
-                            <MenuItem value={"sport"}>Sport&Loisirs</MenuItem>
+                            {categories.map(cat => (
+                                <MenuItem key={cat.id} value={cat.label}>{cat.label}</MenuItem>
+                            ))}
                         </Select>
                     </div>
                     <div className={"container-button-search"}>
@@ -50,7 +55,7 @@ function App(){
                     </div>
                 </div>
                 <div className={"flex-box"}>
-                    <AuctionList/>
+                    <AuctionList />
                 </div>
                 <div className={"column column-right"}>
                 </div>

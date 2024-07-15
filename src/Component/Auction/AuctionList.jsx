@@ -28,7 +28,7 @@ export function AuctionList() {
             {bids.map((bid) => (
                 <div className="box" key={bid.id}>
                     <div className="photo">
-                        <img src="lien-de-votre-image.jpg" alt="Photo"/>
+                        <img src={bid.product.urlImg} alt="Photo"/>
                     </div>
                     <div className="description">
                         <h3>{bid.product.nameProduct}</h3>
