@@ -1,5 +1,3 @@
-import { Header } from './../Component/Header/Header.jsx';
-import { Footer } from './../Component/Footer/Footer.jsx';
 import './Register.css';
 import {Button, FormControlLabel, TextField} from "@mui/material";
 import {useState} from "react";
@@ -18,7 +16,6 @@ export function Register(){
 
     return (
         <div className="App">
-            <Header />
             <main>
                 <h2>Mon Profil</h2>
                 <div className="form-container">
@@ -128,7 +125,6 @@ export function Register(){
                     </form>
                 </div>
             </main>
-            <Footer/>
         </div>
     );
 }

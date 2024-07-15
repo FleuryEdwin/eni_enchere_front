@@ -1,27 +1,15 @@
-import {Header} from './Component/Header/Header.jsx';
-import {Footer} from './Component/Footer/Footer.jsx';
-import './App.css';
-import './EnchereHome.css';
+import './Home.css';
+import '../EnchereHome.css';
 import {Button, Input, InputAdornment, InputLabel, Select, MenuItem} from "@mui/material";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import SearchIcon from '@mui/icons-material/Search';
-import {AuctionList} from "./Component/Auction/AuctionList.jsx";
-import {Outlet} from "react-router-dom";
+import {AuctionList} from "../Component/Auction/AuctionList.jsx";
 
-function App() {
-    const [categories, setCategories] = useState([]);
-    const [selectedCategory, setSelectedCategory] = useState('Toutes');
-
-    useEffect(() => {
-        fetch('http://localhost:8080/categories').then(response => response.json()).then(data => {
-            console.log(data)
-            setCategories(data);
-        }).catch(error => console.error('Error fetching categories:', error));
-    }, []);
+export function Home(){
+    const [category, setCategory] = useState('Toutes');
 
     return (
         <div className="App">
-            <Header/>
             <main>
                 <div className={"search"}>
                     <h2>Liste des enchères</h2>
@@ -41,14 +29,16 @@ function App() {
                     <div className={"select-categorie"}>
                         <Select
                             id={"select-categorie"}
-                            value={selectedCategory}
+                            value={category}
+
                             className={"select"}
-                            onChange={event => setSelectedCategory(event.target.value)}
+                            onChange={event => setCategory(event.target.value)}
                         >
                             <MenuItem value={""}>Toutes</MenuItem>
-                            {categories.map(cat => (
-                                <MenuItem key={cat.id} value={cat.label}>{cat.label}</MenuItem>
-                            ))}
+                            <MenuItem value={"informatique"}>Informatique</MenuItem>
+                            <MenuItem value={"furnishings"}>Ameublement</MenuItem>
+                            <MenuItem value={"clothes"}>Vêtement</MenuItem>
+                            <MenuItem value={"sport"}>Sport&Loisirs</MenuItem>
                         </Select>
                     </div>
                     <div className={"container-button-search"}>
@@ -60,12 +50,7 @@ function App() {
                 </div>
                 <div className={"column column-right"}>
                 </div>
-                <Outlet/>
-
             </main>
-            <Footer/>
         </div>
     );
 }
-
-export default App;

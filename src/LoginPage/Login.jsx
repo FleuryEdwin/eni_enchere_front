@@ -1,13 +1,14 @@
 import './Login.css'
-import {Header} from "../Component/Header/Header.jsx";
-import {Footer} from "../Component/Footer/Footer.jsx";
 import {useState} from "react";
 import {Button, Checkbox, FormControlLabel, TextField} from "@mui/material";
+import {Link} from "react-router-dom";
+
 
 
 
 export function Login(){
     const [email, setEmail] = useState("")
+
     const [password, setPassword] = useState("")
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -42,7 +43,6 @@ export function Login(){
 
     return (
         <div className="App">
-            <Header />
             <main>
                 <form onSubmit={handleSubmit}>
                     <div className={"container"}>
@@ -73,7 +73,6 @@ export function Login(){
                     </div>
                 </form>
             </main>
-            <Footer/>
         </div>
     );
 }
