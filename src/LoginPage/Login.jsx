@@ -1,15 +1,13 @@
 import './Login.css'
-import {Header} from "../Component/Header/Header.jsx";
-import {Footer} from "../Component/Footer/Footer.jsx";
 import {useState} from "react";
 import {Button, Checkbox, FormControlLabel, TextField} from "@mui/material";
+import {Link} from "react-router-dom";
 
-export function Login(){
+export default function Login(){
     const [id, setId] = useState("")
     const [password, setPassword] = useState("")
     return (
         <div className="App">
-            <Header />
             <main>
                 <div className={"container"}>
                     <TextField
@@ -35,10 +33,16 @@ export function Login(){
                     <FormControlLabel className="checkBox" control={<Checkbox/>} label="Se souvenir de moi"/>
                 </div>
                 <div className={"create-account-container"}>
-                    <Button className="create-account-button" variant="contained">Créer un compte</Button>
+                    <Button
+                        className="create-account-button"
+                        variant="contained"
+                        component={Link}
+                        to="/auth/register"
+                    >
+                        Créer un compte
+                    </Button>
                 </div>
             </main>
-            <Footer/>
         </div>
     );
 }
