@@ -10,7 +10,7 @@ import {
 } from "react-router-dom";
 import {Register} from "./RegisterPage/Register.jsx";
 import {Home} from "./Home/Home.jsx";
-// import {ProductDetails} from "./Component/Products/ProductDetails.jsx";
+import {ProductDetails} from "./Component/Products/ProductDetails.jsx";
 
 const router = createBrowserRouter([
     {
@@ -30,6 +30,10 @@ const router = createBrowserRouter([
                path: "auth/register",
                element: <Register /> ,
             },
+            {
+                path:"products/:id/detail",
+                element: <ProductDetails/>
+            }
         ],
     },
 ]);
