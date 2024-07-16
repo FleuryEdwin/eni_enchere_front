@@ -1,13 +1,38 @@
-import { useContext, createContext, useState } from "react";
+import { useContext, createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-const AuthContext = createContext();
+export const AuthContext = createContext();
 
-// eslint-disable-next-line react/prop-types
 const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null)
-    const [token, setToken] = useState(localStorage.getItem("authToken" || ""))
-    const navigate = useNavigate()
+    const [user, setUser] = useState(null);
+    const [token, setToken] = useState(localStorage.getItem("authToken") || "");
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (token) {
+            getUser();
+        }
+    }, [ token]);
+
+    console.log("test : ", user)
+    const getUser = async () => {
+        try {
+            const response = await fetch("http://localhost:8080/auth/me", {
+                method: "GET",
+                headers: {
+                    Accept: "*/*",
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            const data = await response.json();
+            setUser(data);
+            console.log("User:" , data)
+            return data;
+        } catch (err) {
+            console.error(err);
+            return null;
+        }
+    };
 
     const loginAction = async (data) => {
         try {
@@ -18,14 +43,14 @@ const AuthProvider = ({ children }) => {
                 },
                 body: JSON.stringify(data),
             });
+            console.log("data: "+ data)
             const res = await response.json();
-            if (res.data) {
-                setUser(res.data.user);
+            if (response.ok) {
                 setToken(res.token);
                 localStorage.setItem("authToken", res.token);
                 navigate("/");
             } else {
-                console.error("Échec de la connexion");
+                throw new Error(res.message);
             }
         } catch (err) {
             console.error("Erreur lors de la connexion :", err);
@@ -33,15 +58,17 @@ const AuthProvider = ({ children }) => {
     };
 
     const logout = () => {
-        setUser(null)
-        setToken("")
-        localStorage.removeItem("authToken")
-        navigate("/auth/login")
-    }
+        setUser(null);
+        setToken("");
+        localStorage.removeItem("authToken");
+        navigate("/auth/login");
+    };
 
-    return <AuthContext.Provider value={{ token, user, loginAction, logout }}>
-        {children}
-    </AuthContext.Provider>;
+    return (
+        <AuthContext.Provider value={{ token, user, loginAction, logout, getUser }}>
+            {children}
+        </AuthContext.Provider>
+    );
 };
 
 export default AuthProvider;

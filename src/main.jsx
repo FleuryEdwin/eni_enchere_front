@@ -11,7 +11,8 @@ import {
 import {Register} from "./RegisterPage/Register.jsx";
 import {Home} from "./Home/Home.jsx";
 import {ProductDetails} from "./Component/Products/ProductDetails.jsx";
-import {UserProfile} from "./UserProfile/UserProfile.jsx";
+import UserProfile from "./UserProfilePage/UserProfile.jsx";
+
 
 const router = createBrowserRouter([
     {
