@@ -19,13 +19,14 @@ const AuthProvider = ({ children }) => {
                 body: JSON.stringify(data),
             });
             const res = await response.json();
-            if (data) {
-                setUser(res.user);
+            if (res.data) {
+                setUser(res.data.user);
                 setToken(res.token);
                 localStorage.setItem("authToken", res.token);
                 navigate("/");
+            } else {
+                console.error("Échec de la connexion");
             }
-            throw new Error(res.message);
         } catch (err) {
             console.error("Erreur lors de la connexion :", err);
         }
