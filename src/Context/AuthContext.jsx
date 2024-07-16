@@ -33,17 +33,15 @@ const AuthProvider = ({ children }) => {
     };
 
     const logout = () => {
-        setUser(null);
-        setToken("");
-        localStorage.removeItem("authToken");
-        navigate("/auth/login");
-    };
+        setUser(null)
+        setToken("")
+        localStorage.removeItem("authToken")
+        navigate("/auth/login")
+    }
 
-    return (
-        <AuthContext.Provider value={{ token, user, loginAction, logout }}>
-            {children}
-        </AuthContext.Provider>
-    );
+    return <AuthContext.Provider value={{ token, user, loginAction, logout }}>
+        {children}
+    </AuthContext.Provider>;
 };
 
 export default AuthProvider;

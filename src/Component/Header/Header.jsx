@@ -1,16 +1,13 @@
 import './Header.css';
 import {Button} from "@mui/material";
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {useAuth} from "../../Context/AuthContext.jsx";
 
 export function Header() {
-    const navigate = useNavigate();
 
     function isLoggedIn() {
         return localStorage.getItem('authToken') !== null;
     }
-
-    console.log(isLoggedIn())
 
     const auth = useAuth()
 
@@ -27,7 +24,7 @@ export function Header() {
                     <Button component={Link} to="/auth/login">
                         Vendre un article
                     </Button>
-                    <Button component={Link} to="/auth/login">
+                    <Button component={Link} to="users/{id}/profile">
                         Mon profil
                     </Button>
                     <Button onClick={() => auth.logout()}>
@@ -35,7 +32,7 @@ export function Header() {
                     </Button>
                 </div>
                 :
-                <div className="user-profile">
+                <div className="user-profilee">
                     <Button component={Link} to="/auth/login">
                         Login
                     </Button>

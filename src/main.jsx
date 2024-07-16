@@ -11,6 +11,7 @@ import {
 import {Register} from "./RegisterPage/Register.jsx";
 import {Home} from "./Home/Home.jsx";
 import {ProductDetails} from "./Component/Products/ProductDetails.jsx";
+import {UserProfile} from "./UserProfile/UserProfile.jsx";
 
 const router = createBrowserRouter([
     {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
             {
                 path:"products/:id/detail",
                 element: <ProductDetails/>
+            },
+            {
+                path:"users/:id/profile",
+                element: <UserProfile />
             }
         ],
     },
