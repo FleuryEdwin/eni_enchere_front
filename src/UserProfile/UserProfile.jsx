@@ -1,7 +1,8 @@
-import {AuthContext} from "../Context/AuthContext.jsx";
 import {Button} from "@mui/material";
 import {Link} from "react-router-dom";
+import {AuthContext} from "../Context/AuthContext.jsx";
 import {useContext} from "react";
+
 
 export function UserProfile(){
     const { getUser, user } = useContext(AuthContext);
