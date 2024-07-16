@@ -1,28 +1,15 @@
-.main{
-    flex-direction: column;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-}
-
-.container{
-    padding-bottom: 15px;
-}
-
 .input{
-    width: 350px;
+    width: 500px;
 }
 
 .checkBox{
     padding-left: 20px;
 }
 
-.create-account-button{
-    width: 350px;
-    height: 75px;
+.register-button{
+    padding-top: 50px;
 }
 
-.create-account-container{
-    padding-top: 50px;
+.form_control{
+    padding-bottom: 20px;
 }

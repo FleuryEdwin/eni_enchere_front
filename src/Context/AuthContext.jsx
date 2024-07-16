@@ -19,9 +19,8 @@ const AuthProvider = ({ children }) => {
                 body: JSON.stringify(data),
             });
             const res = await response.json();
-            console.log(res)
             if (data) {
-                setUser(data.user);
+                setUser(res.user);
                 setToken(res.token);
                 localStorage.setItem("authToken", res.token);
                 navigate("/");
