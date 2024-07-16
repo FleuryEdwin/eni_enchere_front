@@ -1,42 +1,18 @@
 import './Header.css';
 import {Button} from "@mui/material";
 import {Link, useNavigate} from "react-router-dom";
-import {useState} from "react";
+import {useAuth} from "../../Context/AuthContext.jsx";
 
 export function Header() {
-    const tokenBlacklist = localStorage.getItem('authToken')
     const navigate = useNavigate();
-
-    const handleDisconnect = async(event) =>{
-        event.preventDefault()
-
-        try {
-            const response = await fetch("http://localhost:8080/auth/logout", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(tokenBlacklist),
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-                console.log("deconnexion réussie :", data);
-                // Redirige vers la page d'accueil
-                navigate("/");
-            } else {
-                console.error("Échec de la deconnexion");
-            }
-        } catch (error) {
-            console.error("Erreur lors de la deconnexion :", error);
-        }
-    }
 
     function isLoggedIn() {
         return localStorage.getItem('authToken') !== null;
     }
 
     console.log(isLoggedIn())
+
+    const auth = useAuth()
 
     return (
         <header className="header">
@@ -54,7 +30,7 @@ export function Header() {
                     <Button component={Link} to="/auth/login">
                         Mon profil
                     </Button>
-                    <Button onClick={handleDisconnect}>
+                    <Button onClick={() => auth.logout()}>
                         Déconnexion
                     </Button>
                 </div>
