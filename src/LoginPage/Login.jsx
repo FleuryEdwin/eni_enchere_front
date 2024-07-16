@@ -1,48 +1,11 @@
 import './Login.css'
 import {useState} from "react";
-import {Button, Checkbox, FormControlLabel, TextField} from "@mui/material";
-import {Link, useNavigate} from "react-router-dom";
-import AuthProvider, {useAuth} from "../Context/AuthContext.jsx";
-import authContext from "../Context/AuthContext.jsx";
+import {useAuth} from "../Context/AuthContext.jsx";
+
 
 export function Login() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const navigate = useNavigate();
 
-    /*const handleSubmit = async (event) => {
-        event.preventDefault();
 
-        const loginData = {
-            email,
-            password,
-        };
-
-        try {
-            const response = await fetch("http://localhost:8080/auth/login", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(loginData),
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-                console.log("Connexion réussie :", data);
-
-                // Stockez le jeton d'authentification dans localStorage
-                localStorage.setItem("authToken", data.token);
-
-                // Redirigez vers la page d'accueil
-                navigate("/");
-            } else {
-                console.error("Échec de la connexion");
-            }
-        } catch (error) {
-            console.error("Erreur lors de la connexion :", error);
-        }
-    };*/
     const [input, setInput] = useState({
         email: "",
         password: "",

@@ -1,11 +1,15 @@
-import  { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Button, TextField } from "@mui/material";
+import { useAuth } from "../../Context/AuthContext";
 
 export function ProductDetails() {
     const { id } = useParams();
     const [product, setProduct] = useState(null);
     const [offer, setOffer] = useState("");
+    const auth  = useAuth();
+
+    console.log(auth);
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -31,7 +35,7 @@ export function ProductDetails() {
         const bidData = {
             bidDate: new Date().toISOString().split("T")[0],
             offer: parseInt(offer),
-            bidderId: user.idUser,
+            bidderId: auth.user?.id,
             productId: product.idProduct,
         };
 
@@ -47,7 +51,6 @@ export function ProductDetails() {
             console.error(bidData);
 
             if (response.ok) {
-                // Traitement de la réponse réussie (mise à jour de l'interface, etc.)
                 console.log("Nouvelle enchère soumise avec succès");
             } else {
                 console.error("Échec de la soumission de l'enchère");
@@ -67,19 +70,21 @@ export function ProductDetails() {
                     <p>Date de fin d'enchère : {product.auctionEnd}</p>
                     <p>Meilleure offre en cours : {product.finalPrice} €</p>
                     <p>Offre de départ : {product.startPrice} €</p>
-                    <form onSubmit={handleBidSubmit}>
-                        <TextField
-                            id="outlined-basic"
-                            className="input"
-                            label="Nouvelle enchère"
-                            type="number"
-                            value={offer}
-                            onChange={(event) => setOffer(event.target.value)}
-                        />
-                        <Button variant="contained" type="submit">
-                            Enchérir
-                        </Button>
-                    </form>
+                    {auth && (
+                        <form onSubmit={handleBidSubmit}>
+                            <TextField
+                                id="outlined-basic"
+                                className="input"
+                                label="Nouvelle enchère"
+                                type="number"
+                                value={offer}
+                                onChange={(event) => setOffer(event.target.value)}
+                            />
+                            <Button variant="contained" type="submit">
+                                Enchérir
+                            </Button>
+                        </form>
+                    )}
                 </>
             )}
         </div>
