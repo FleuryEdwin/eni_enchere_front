@@ -1,15 +1,13 @@
-import { useState, useEffect } from "react";
+import {useContext, useEffect, useState} from "react";
 import { useParams } from "react-router-dom";
 import { Button, TextField } from "@mui/material";
-import { useAuth } from "../../Context/AuthContext";
+import {AuthContext} from "../../Context/AuthContext.jsx";
 
 export function ProductDetails() {
     const { id } = useParams();
     const [product, setProduct] = useState(null);
     const [offer, setOffer] = useState("");
-    const auth  = useAuth();
-
-    console.log(auth);
+    const { getUser, user } = useContext(AuthContext);
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -27,6 +25,7 @@ export function ProductDetails() {
         };
 
         fetchProduct();
+        getUser(); // Récupérez l'utilisateur connecté
     }, [id]);
 
     const handleBidSubmit = async (event) => {
@@ -35,7 +34,7 @@ export function ProductDetails() {
         const bidData = {
             bidDate: new Date().toISOString().split("T")[0],
             offer: parseInt(offer),
-            bidderId: auth.user?.id,
+            bidderId: user?.idUser, // Utilisez l'opérateur optionnel pour éviter les erreurs si user est null
             productId: product.idProduct,
         };
 
@@ -47,8 +46,6 @@ export function ProductDetails() {
                 },
                 body: JSON.stringify(bidData),
             });
-
-            console.error(bidData);
 
             if (response.ok) {
                 console.log("Nouvelle enchère soumise avec succès");
@@ -70,7 +67,7 @@ export function ProductDetails() {
                     <p>Date de fin d'enchère : {product.auctionEnd}</p>
                     <p>Meilleure offre en cours : {product.finalPrice} €</p>
                     <p>Offre de départ : {product.startPrice} €</p>
-                    {auth && (
+                    {user && (
                         <form onSubmit={handleBidSubmit}>
                             <TextField
                                 id="outlined-basic"
