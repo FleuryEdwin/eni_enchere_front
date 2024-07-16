@@ -1,47 +1,51 @@
-import { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Button, TextField } from "@mui/material";
 
 export function ProductDetails() {
     const { id } = useParams();
-    const [bid, setBid] = useState(null);
+    const [product, setProduct] = useState(null);
     const [offer, setOffer] = useState("");
 
     useEffect(() => {
-        const fetchBid = async () => {
+        const fetchProduct = async () => {
             try {
-                const response = await fetch(`http://localhost:8080/bids/${id}`);
+                const response = await fetch(`http://localhost:8080/products/${id}`);
                 if (response.ok) {
                     const data = await response.json();
-                    setBid(data);
+                    setProduct(data);
                 } else {
-                    console.error("Error fetching bid: ", response.statusText);
+                    console.error("Error fetching product: ", response.statusText);
                 }
             } catch (error) {
-                console.error("Error fetching bid: ", error);
+                console.error("Error fetching product: ", error);
             }
         };
 
-        fetchBid();
+        fetchProduct();
     }, [id]);
 
     const handleBidSubmit = async (event) => {
         event.preventDefault();
 
         const bidData = {
-            offer,
+            bidDate: new Date().toISOString().split("T")[0],
+            offer: parseInt(offer),
+            bidderId: user.idUser,
+            productId: product.idProduct,
         };
 
         try {
-            const response = await fetch(`http://localhost:8080/bids/${bid.idBid}/offer`, {
-                method: "PATCH",
+            const response = await fetch(`http://localhost:8080/bids/new`, {
+                method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(bidData),
             });
 
-            console.error(bidData)
+            console.error(bidData);
+
             if (response.ok) {
                 // Traitement de la réponse réussie (mise à jour de l'interface, etc.)
                 console.log("Nouvelle enchère soumise avec succès");
@@ -55,14 +59,14 @@ export function ProductDetails() {
 
     return (
         <div>
-            {bid && (
+            {product && (
                 <>
-                    <h2>{bid.product.nameProduct}</h2>
-                    <p>Catégorie : {bid.product.category.label}</p>
-                    <p>Vendeur : {bid.product.seller.username} ({bid.product.seller.address})</p>
-                    <p>Date de fin d'enchère : {bid.auctionEnd}</p>
-                    <p>Meilleure offre en cours : {bid.finalPrice} €</p>
-                    <p>Offre de départ : {bid.product.startPrice} €</p>
+                    <h2>{product.nameProduct}</h2>
+                    <p>Catégorie : {product.category.label}</p>
+                    <p>Vendeur : {product.seller.username} ({product.seller.address})</p>
+                    <p>Date de fin d'enchère : {product.auctionEnd}</p>
+                    <p>Meilleure offre en cours : {product.finalPrice} €</p>
+                    <p>Offre de départ : {product.startPrice} €</p>
                     <form onSubmit={handleBidSubmit}>
                         <TextField
                             id="outlined-basic"
