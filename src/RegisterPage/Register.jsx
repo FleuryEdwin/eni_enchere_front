@@ -1,5 +1,5 @@
 import './Register.css';
-import {Button, FormControlLabel, TextField} from "@mui/material";
+import {Button, TextField} from "@mui/material";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 
@@ -17,10 +17,6 @@ export function Register(){
     const country = "test"
 
     const navigate = useNavigate()
-
-    function isLoggedIn() {
-        return localStorage.getItem('authToken') !== null;
-    }
 
     const handleSubmit = async (event) => {
         event.preventDefault()
@@ -51,7 +47,6 @@ export function Register(){
             if (response.ok) {
                 // Traitez la réponse de l'API ici, par exemple :
                 console.log("Utilisateur enregistré avec succès");
-                console.log(isLoggedIn())
                 navigate("/")
             } else {
                 console.error("Échec de l'enregistrement de l'utilisateur");

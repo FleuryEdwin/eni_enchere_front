@@ -1,14 +1,13 @@
 import './Login.css'
 import {useState} from "react";
 import {Button, Checkbox, FormControlLabel, TextField} from "@mui/material";
-import { useNavigate } from "react-router-dom";
-
-
+import {Link, useNavigate} from "react-router-dom";
 
 export function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
+
     const handleSubmit = async (event) => {
         event.preventDefault();
 
@@ -18,7 +17,7 @@ export function Login() {
         };
 
         try {
-            const response = await fetch("http://localhost:8080/auth/login/", {
+            const response = await fetch("http://localhost:8080/auth/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
