@@ -6,7 +6,7 @@ import {useContext} from "react";
 export function UserProfile(){
     const { getUser, user } = useContext(AuthContext);
     return(
-        <div>
+        <div className="Profile">
             <p>Pseudo: {user.username}</p>
             <p>Nom: {user.familyName}</p>
             <p>Prénom: {user.firstName}</p>
