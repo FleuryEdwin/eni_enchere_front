@@ -1,21 +1,20 @@
-import {useAuth} from "../Context/AuthContext.jsx";
+import {AuthContext} from "../Context/AuthContext.jsx";
 import {Button} from "@mui/material";
 import {Link} from "react-router-dom";
+import {useContext} from "react";
 
 export function UserProfile(){
-    const auth = useAuth()
+    const { getUser, user } = useContext(AuthContext);
     return(
         <div>
-            <ul>
-                <li>Pseudo: {auth.user?.username}</li>
-                <li>Nom: {auth.user?.familyName}</li>
-                <li>Prénom: {auth.user?.firstName}</li>
-                <li>Email: {auth.user?.email}</li>
-                <li>Teléphone: {auth.user?.phone}</li>
-                <li>Rue: {auth.user?.address}</li>
-                <li>Code postal: {auth.user?.postalCode}</li>
-                <li>Ville: {auth.user?.city}</li>
-            </ul>
+            <p>Pseudo: {user.username}</p>
+            <p>Nom: {user.familyName}</p>
+            <p>Prénom: {user.firstName}</p>
+            <p>Email: {user.email}</p>
+            <p>Teléphone: {user.phone}</p>
+            <p>Rue: {user.address}</p>
+            <p>Code postal: {user.postalCode}</p>
+            <p>Ville: {user.city}</p>
         <div>
             <Button variant="contained" component={Link} to="/auth/login">Modifier</Button>
         </div>
