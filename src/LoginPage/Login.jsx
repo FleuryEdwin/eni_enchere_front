@@ -27,7 +27,9 @@ export function Login() {
     };
 
     return (
+
         <form onSubmit={handleSubmitEvent}>
+            <h1>Connexion</h1>
             <div className="form_control">
                 <TextField
                     className="input"
@@ -47,10 +49,13 @@ export function Login() {
                     label="Mot de passe"
                     onChange={handleInput}
                 />
+
+            </div>
+            <div><FormControlLabel className="checkBox" control={<Checkbox/>} label="Se souvenir du mot de passe"/>
             </div>
             <div className="buttons">
                 <Button variant="contained" className="connection-button" type="submit">Connexion</Button>
-                <FormControlLabel className="checkBox" control={<Checkbox />} label="Se souvenir du mot de passe" />
+
             </div>
             <div className="register-button">
                 <Button variant="contained" component={Link} to="/auth/login">Créer un compte</Button>

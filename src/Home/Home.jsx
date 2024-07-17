@@ -4,11 +4,14 @@ import {Button, Input, InputAdornment, InputLabel, Select, MenuItem} from "@mui/
 import {useEffect, useState} from "react";
 import SearchIcon from '@mui/icons-material/Search';
 import {ProductList} from "../Component/Products/ProductList.jsx";
+import {useLocation} from "react-router-dom";
 
 export function Home(){
     const [categories, setCategories] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('Toutes');
-
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const productAdded = searchParams.get('productAdded') === 'true';
     useEffect(() => {
         fetch('http://localhost:8080/categories').then(response => response.json()).then(data => {
             console.log(data)
@@ -19,8 +22,10 @@ export function Home(){
     return (
         <div className="App">
             <main>
+                {productAdded && <div>Le produit a été ajouté avec succès !</div>}
+
                 <div className={"search"}>
-                    <h2>Liste des enchères</h2>
+                    <h1>Liste des enchères</h1>
                     <div className={"searchBar"}>
                         <InputLabel htmlFor="outlined-basic">
                             Filtres
@@ -41,7 +46,7 @@ export function Home(){
                             className={"select"}
                             onChange={event => setSelectedCategory(event.target.value)}
                         >
-                            <MenuItem value={""}>Toutes</MenuItem>
+                            <MenuItem value={"Informatique"}></MenuItem>
                             {categories.map(cat => (
                                 <MenuItem key={cat.id} value={cat.label}>{cat.label}</MenuItem>
                             ))}

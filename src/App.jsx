@@ -5,7 +5,7 @@ import AuthProvider from './Context/AuthContext.jsx';
 
 function App() {
     return (
-            <div className="App">
+
                 <AuthProvider>
                     <Header />
                     <main>
@@ -13,7 +13,7 @@ function App() {
                     </main>
                     <Footer />
                 </AuthProvider>
-            </div>
+
     );
 }
 
