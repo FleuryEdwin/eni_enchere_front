@@ -1,5 +1,5 @@
 import {useContext, useEffect, useState} from "react";
-import { useParams } from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import { Button, TextField } from "@mui/material";
 import {AuthContext} from "../../Context/AuthContext.jsx";
 
@@ -8,6 +8,7 @@ export function ProductDetails() {
     const [product, setProduct] = useState(null);
     const [offer, setOffer] = useState("");
     const { getUser, user } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -48,6 +49,8 @@ export function ProductDetails() {
             });
 
             if (response.ok) {
+
+                navigate("/")
                 console.log("Nouvelle enchère soumise avec succès");
             } else {
                 console.error("Échec de la soumission de l'enchère");

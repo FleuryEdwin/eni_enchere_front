@@ -24,7 +24,7 @@ export function Header() {
     return (
         <header className="header">
             <div className="logo">
-                <a href="/public">Eni-Enchères</a>
+                <a href="/">Eni-Enchères</a>
             </div>
             {isLoggedIn() ?
                 <div className="user-profile">
