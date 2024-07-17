@@ -28,10 +28,10 @@ export function Header() {
             </div>
             {isLoggedIn() ?
                 <div className="user-profile">
-                    <Button component={Link} to="/auth/login">
+                    <Button style={{color:"white"}} component={Link} to="/auth/login">
                         Enchères
                     </Button>
-                    <Button component={Link} to="/product/add">
+                    <Button style={{color:"white"}} component={Link} to="/product/add">
                         Vendre un article
                     </Button>
                     <Button style={{color:"white"}} onClick={handleClick}>
@@ -42,8 +42,8 @@ export function Header() {
                     </Button>
                 </div>
                 :
-                <div className="user-profilee">
-                    <Button component={Link} to="/auth/login">
+                <div className="user-profile">
+                    <Button style={{color:"white"}} component={Link} to="/auth/login">
                         Login
                     </Button>
                 </div>}

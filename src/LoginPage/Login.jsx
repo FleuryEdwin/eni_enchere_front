@@ -6,6 +6,8 @@ import {Link} from "react-router-dom";
 
 export function Login() {
 
+    const [rememberMe, setRememberMe] = useState(false)
+
     const [input, setInput] = useState({
         email: "",
         password: "",
@@ -51,7 +53,8 @@ export function Login() {
                 />
 
             </div>
-            <div><FormControlLabel className="checkBox" control={<Checkbox/>} label="Se souvenir du mot de passe"/>
+            <div>
+                <FormControlLabel className="checkBox" value={rememberMe} onValueChange={event => setRememberMe(event)} control={<Checkbox/>} label="Se souvenir de moi"/>
             </div>
             <div className="buttons">
                 <Button variant="contained" className="connection-button" type="submit">Connexion</Button>
