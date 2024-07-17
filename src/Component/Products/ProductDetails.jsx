@@ -68,7 +68,7 @@ export function ProductDetails() {
                 <>
                     <h2>{product.nameProduct}</h2>
                     <p>Catégorie : {product.categoryLabel}</p>
-                    <p>Meilleure offre en cours : {product.finalPrice} €</p>
+                    <p>Meilleure offre en cours : {product.highestBid} € par : {product.highestBidder}</p>
                     <p>Mise à prix: {product.startPrice} €</p>
                     <p>Date de fin d'enchère : {product.auctionEnd}</p>
                     <p>Retrait : {product.address}</p>

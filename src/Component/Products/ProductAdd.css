@@ -6,10 +6,9 @@ main {
 
 }
 .product{
-    height: 72vh;
+    height: 100%;
 }
 .productDetail {
-
     padding: 30px;
     border-radius: 20px;
     border: 2px solid navy;
