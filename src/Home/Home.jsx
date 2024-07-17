@@ -20,8 +20,7 @@ export function Home(){
     }, []);
 
     return (
-        <div className="App">
-            <main>
+      <div>
                 {productAdded && <div>Le produit a été ajouté avec succès !</div>}
 
                 <div className={"search"}>
@@ -61,7 +60,7 @@ export function Home(){
                 </div>
                 <div className={"column column-right"}>
                 </div>
-            </main>
-        </div>
+      </div>
+
     );
 }

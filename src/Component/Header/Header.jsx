@@ -34,10 +34,10 @@ export function Header() {
                     <Button component={Link} to="/product/add">
                         Vendre un article
                     </Button>
-                    <Button onClick={handleClick}>
+                    <Button style={{color:"white"}} onClick={handleClick}>
                         Mon profil
                     </Button>
-                    <Button onClick={() => auth.logout()}>
+                    <Button style={{color:"white"}} onClick={() => auth.logout()}>
                         Déconnexion
                     </Button>
                 </div>
