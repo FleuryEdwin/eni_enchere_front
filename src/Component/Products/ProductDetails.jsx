@@ -2,7 +2,7 @@ import {useContext, useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import { Button, TextField } from "@mui/material";
 import {AuthContext} from "../../Context/AuthContext.jsx";
-
+import "./ProductAdd.css";
 export function ProductDetails() {
     const { id } = useParams();
     const [product, setProduct] = useState(null);
@@ -61,15 +61,20 @@ export function ProductDetails() {
     };
 
     return (
-        <div>
+        <div className="product">
+            <h1>Ajouter un objet à vendre</h1>
+        <div className="productDetail">
             {product && (
                 <>
                     <h2>{product.nameProduct}</h2>
-                    <p>Catégorie : {product.category.label}</p>
-                    <p>Vendeur : {product.seller.username} ({product.seller.address})</p>
-                    <p>Date de fin d'enchère : {product.auctionEnd}</p>
+                    <p>Catégorie : {product.categoryLabel}</p>
                     <p>Meilleure offre en cours : {product.finalPrice} €</p>
-                    <p>Offre de départ : {product.startPrice} €</p>
+                    <p>Mise à prix: {product.startPrice} €</p>
+                    <p>Date de fin d'enchère : {product.auctionEnd}</p>
+                    <p>Retrait : {product.address}</p>
+                    <p>Vendeur : {product.sellerUsername} </p>
+
+
                     {user && (
                         <form onSubmit={handleBidSubmit}>
                             <TextField
@@ -80,13 +85,14 @@ export function ProductDetails() {
                                 value={offer}
                                 onChange={(event) => setOffer(event.target.value)}
                             />
-                            <Button variant="contained" type="submit">
+                            <Button style={{marginTop: 20}} variant="contained" type="submit">
                                 Enchérir
                             </Button>
                         </form>
                     )}
                 </>
             )}
+        </div>
         </div>
     );
 }

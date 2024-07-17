@@ -28,6 +28,7 @@ export function Login() {
 
     return (
 
+        <div className="login">
         <form onSubmit={handleSubmitEvent}>
             <h1>Connexion</h1>
             <div className="form_control">
@@ -61,5 +62,6 @@ export function Login() {
                 <Button variant="contained" component={Link} to="/auth/register">Créer un compte</Button>
             </div>
         </form>
+        </div>
     )
 }
