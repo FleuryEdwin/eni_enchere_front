@@ -58,7 +58,7 @@ export function Login() {
 
             </div>
             <div className="register-button">
-                <Button variant="contained" component={Link} to="/auth/login">Créer un compte</Button>
+                <Button variant="contained" component={Link} to="/auth/register">Créer un compte</Button>
             </div>
         </form>
     )
