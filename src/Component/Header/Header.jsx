@@ -31,7 +31,7 @@ export function Header() {
                     <Button component={Link} to="/auth/login">
                         Enchères
                     </Button>
-                    <Button component={Link} to="/auth/login">
+                    <Button component={Link} to="/product/add">
                         Vendre un article
                     </Button>
                     <Button onClick={handleClick}>

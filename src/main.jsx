@@ -12,6 +12,7 @@ import {Register} from "./RegisterPage/Register.jsx";
 import {Home} from "./Home/Home.jsx";
 import {ProductDetails} from "./Component/Products/ProductDetails.jsx";
 import {UserProfile} from "./UserProfile/UserProfile.jsx";
+import ProductAdd from "./Component/Products/ProductAdd.jsx";
 
 
 const router = createBrowserRouter([
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
             {
                 path:"users/:id/profile",
                 element: <UserProfile />
+            },
+            {
+                path:"/product/add",
+                element:<ProductAdd/>
             }
         ],
     },
