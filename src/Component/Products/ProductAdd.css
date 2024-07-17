@@ -1,6 +1,20 @@
-main{
+main {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+}
+.product{
+    height: 72vh;
+}
+.productDetail {
+
+    padding: 30px;
+    border-radius: 20px;
+    border: 2px solid navy;
+}
+.productDetail form {
+    display: flex;
+    flex-direction: column;
 }
