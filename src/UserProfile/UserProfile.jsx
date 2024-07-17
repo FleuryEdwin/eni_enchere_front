@@ -1,11 +1,19 @@
 import {Button} from "@mui/material";
-import {Link} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {AuthContext} from "../Context/AuthContext.jsx";
 import {useContext} from "react";
 
 
 export function UserProfile(){
-    const { getUser, user } = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
+
+    const navigate = useNavigate()
+
+    const handleClick = (idUser) => {
+        idUser = user.idUser
+        navigate(`/users/${idUser}/profile/edit`);
+    };
+
     return(
         <div className="Profile">
             <p>Pseudo: {user.username}</p>
@@ -17,7 +25,7 @@ export function UserProfile(){
             <p>Code postal: {user.postalCode}</p>
             <p>Ville: {user.city}</p>
         <div>
-            <Button variant="contained" component={Link} to="/auth/login">Modifier</Button>
+            <Button variant="contained" onClick={handleClick}>Modifier</Button>
         </div>
         </div>
     )

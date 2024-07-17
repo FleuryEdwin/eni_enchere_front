@@ -14,6 +14,14 @@ const AuthProvider = ({ children }) => {
         }
     }, [ token]);
 
+    const updateUser = (userData) => {
+        setUser(prevUser => ({
+            ...prevUser,
+            ...userData,
+            idUser: prevUser.idUser
+        }));
+    };
+
     console.log("test : ", user)
     const getUser = async () => {
         try {
@@ -65,7 +73,7 @@ const AuthProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ token, user, loginAction, logout, getUser }}>
+        <AuthContext.Provider value={{ token, user, updateUser,loginAction, logout, getUser }}>
             {children}
         </AuthContext.Provider>
     );

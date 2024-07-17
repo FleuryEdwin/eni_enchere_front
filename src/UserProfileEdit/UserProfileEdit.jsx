@@ -1,57 +1,71 @@
-import './Register.css';
 import {Button, TextField} from "@mui/material";
-import {useState} from "react";
+import {useContext, useEffect, useState} from "react";
+import {AuthContext} from "../Context/AuthContext.jsx";
+import DeleteIcon from '@mui/icons-material/Delete';
 import {useNavigate} from "react-router-dom";
 
-export function Register(){
-    const[userName, setUsername] = useState("")
+export function UserProfileEdit() {
+    const { user, updateUser } = useContext(AuthContext);
+
+    const[username, setUsername] = useState("")
     const[firstName, setFirstName] = useState("")
     const[phone, setPhone] = useState("")
     const[postalCode, setPostalCode] = useState("")
-    const[password, setPassword] = useState("")
+    //const[password, setPassword] = useState("")
     const[familyName, setFamilyName] = useState("")
     const[email, setEmail] = useState("")
     const[address, setAddress] = useState("")
     const[city, setCity] = useState("")
-    const[confirmPassword, setConfirmPassword] = useState("")
-    const country = "test"
+    //const[confirmPassword, setConfirmPassword] = useState("")
+
+    useEffect(() => {
+        if (user) {
+            setUsername(user.username);
+            setFirstName(user.firstName);
+            setPhone(user.phone);
+            setPostalCode(user.postalCode);
+            setFamilyName(user.familyName);
+            setEmail(user.email);
+            setAddress(user.address);
+            setCity(user.city);
+        }
+    }, [user]);
 
     const navigate = useNavigate()
 
     const handleSubmit = async (event) => {
         event.preventDefault()
 
-        const userData = {
-            userName,
+        const idUser = user.idUser
+        const userProfileData = {
+            username,
             firstName,
+            phone,
+            postalCode,
             familyName,
             email,
-            phone,
             address,
-            postalCode,
             city,
-            password,
-            country,
+            password: user.password,
         }
 
-        console.log(userData)
-
         try {
-            const response = await fetch("http://localhost:8080/auth/signup", {
-                method: "POST",
+            const response = await fetch(`http://localhost:8080/users/${idUser}/profile/edit`, {
+                method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(userData),
+                body: JSON.stringify(userProfileData),
             });
             if (response.ok) {
-                console.log("Utilisateur enregistré avec succès");
-                navigate("/")
+                console.log("Utilisateur modifié avec succès");
+                updateUser(userProfileData);
+                navigate(`/`);
             } else {
-                console.error("Échec de l'enregistrement de l'utilisateur");
+                console.error("Échec de la modification de l'utilisateur");
             }
         } catch (error) {
-            console.error("Erreur lors de l'enregistrement de l'utilisateur :", error);
+            console.error("Erreur lors de la modification de l'utilisateur :", error);
         }
     }
 
@@ -63,16 +77,14 @@ export function Register(){
                     <form className="register-form" onSubmit={handleSubmit}>
                         <div className={"container-input"}>
                             <TextField
-                                id="outlined-basic"
                                 className="input"
                                 label="Pseudo :"
-                                value={userName}
+                                value={username}
                                 onChange={event => setUsername(event.target.value)}
                             />
                         </div>
                         <div className={"container-input"}>
                             <TextField
-                                id="outlined-basic"
                                 className="input"
                                 label="Prénom :"
                                 value={firstName}
@@ -81,7 +93,22 @@ export function Register(){
                         </div>
                         <div className={"container-input"}>
                             <TextField
-                                id="outlined-basic"
+                                className="input"
+                                label="Nom :"
+                                value={familyName}
+                                onChange={event => setFamilyName(event.target.value)}
+                            />
+                        </div>
+                        <div className={"container-input"}>
+                            <TextField
+                                className="input"
+                                label="Email :"
+                                value={email}
+                                onChange={event => setEmail(event.target.value)}
+                            />
+                        </div>
+                        <div className={"container-input"}>
+                            <TextField
                                 className="input"
                                 label="Téléphone :"
                                 value={phone}
@@ -90,16 +117,30 @@ export function Register(){
                         </div>
                         <div className={"container-input"}>
                             <TextField
-                                id="outlined-basic"
+                                className="input"
+                                label="Rue :"
+                                value={address}
+                                onChange={event => setAddress(event.target.value)}
+                            />
+                        </div>
+                        <div className={"container-input"}>
+                            <TextField
+                                className="input"
+                                label="Ville :"
+                                value={city}
+                                onChange={event => setCity(event.target.value)}
+                            />
+                        </div>
+                        <div className={"container-input"}>
+                            <TextField
                                 className="input"
                                 label="Code postal :"
                                 value={postalCode}
                                 onChange={event => setPostalCode(event.target.value)}
                             />
                         </div>
-                        <div className={"container-input"}>
+                        {/*<div className={"container-input"}>
                             <TextField
-                                id="outlined-password-input"
                                 className="input"
                                 label="Mot de passe :"
                                 type="password"
@@ -109,61 +150,32 @@ export function Register(){
                         </div>
                         <div className={"container-input"}>
                             <TextField
-                                id="outlined-basic"
-                                className="input"
-                                label="Nom :"
-                                value={familyName}
-                                onChange={event => setFamilyName(event.target.value)}
-                            />
-                        </div>
-                        <div className={"container-input"}>
-                            <TextField
-                                id="outlined-basic"
-                                className="input"
-                                label="Email :"
-                                value={email}
-                                onChange={event => setEmail(event.target.value)}
-                            />
-                        </div>
-                        <div className={"container-input"}>
-                            <TextField
-                                id="outlined-basic"
-                                className="input"
-                                label="Rue :"
-                                value={address}
-                                onChange={event => setAddress(event.target.value)}
-                            />
-                        </div>
-                        <div className={"container-input"}>
-                            <TextField
-                                id="outlined-basic"
-                                className="input"
-                                label="Ville :"
-                                value={city}
-                                onChange={event => setCity(event.target.value)}
-                            />
-                        </div>
-                        <div className={"container-input"}>
-                            <TextField
-                                id="outlined-password-input"
                                 className="input"
                                 label="Confirmation :"
                                 type="password"
                                 value={confirmPassword}
                                 onChange={event => setConfirmPassword(event.target.value)}
                             />
-                        </div>
-                        <div className={"container-button-confirm"}>
-                            <Button className="button" variant="contained" onClick={handleSubmit}>
-                                Confirmer
+                        </div>*/}
+                        <p>Crédit: </p>
+                        <div className={"container-button-cancel"}>
+                            <Button
+                                className="button"
+                                variant="outlined"
+                                color="error"
+                                startIcon={<DeleteIcon/>}
+                            >
+                                Supprimer mon compte
                             </Button>
                         </div>
-                        <div className={"container-button-cancel"}>
-                            <Button className="button" variant="contained">Annuler</Button>
+                        <div className={"container-button-confirm"}>
+                            <Button className="button" variant="contained" type="submit">
+                                Enregistrer
+                            </Button>
                         </div>
                     </form>
                 </div>
             </main>
         </div>
-    );
+    )
 }

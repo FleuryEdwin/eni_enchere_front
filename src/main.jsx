@@ -11,7 +11,8 @@ import {
 import {Register} from "./RegisterPage/Register.jsx";
 import {Home} from "./Home/Home.jsx";
 import {ProductDetails} from "./Component/Products/ProductDetails.jsx";
-import UserProfile from "./UserProfilePage/UserProfile.jsx";
+import {UserProfile} from "./UserProfile/UserProfile.jsx";
+import {UserProfileEdit} from "./UserProfileEdit/UserProfileEdit.jsx";
 
 
 const router = createBrowserRouter([
@@ -39,7 +40,11 @@ const router = createBrowserRouter([
             {
                 path:"users/:id/profile",
                 element: <UserProfile />
-            }
+            },
+            {
+                path:"users/:id/profile/edit",
+                element: <UserProfileEdit />
+            },
         ],
     },
 ]);

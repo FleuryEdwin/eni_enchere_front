@@ -53,7 +53,7 @@ export function Login() {
                 <FormControlLabel className="checkBox" control={<Checkbox />} label="Se souvenir du mot de passe" />
             </div>
             <div className="register-button">
-                <Button variant="contained" component={Link} to="/auth/login">Créer un compte</Button>
+                <Button variant="contained" component={Link} to="/auth/register">Créer un compte</Button>
             </div>
         </form>
     )

@@ -1,9 +1,10 @@
 import './Home.css';
 import '../EnchereHome.css';
 import {Button, Input, InputAdornment, InputLabel, Select, MenuItem} from "@mui/material";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import SearchIcon from '@mui/icons-material/Search';
 import {ProductList} from "../Component/Products/ProductList.jsx";
+import {AuthContext} from "../Context/AuthContext.jsx";
 
 export function Home(){
     const [categories, setCategories] = useState([]);
