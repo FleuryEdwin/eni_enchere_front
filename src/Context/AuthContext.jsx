@@ -22,7 +22,6 @@ const AuthProvider = ({ children }) => {
         }));
     };
 
-    console.log("test : ", user)
     const getUser = async () => {
         try {
             const response = await fetch("http://localhost:8080/auth/me", {
@@ -34,7 +33,6 @@ const AuthProvider = ({ children }) => {
             });
             const data = await response.json();
             setUser(data);
-            console.log("User:" , data)
             return data;
         } catch (err) {
             console.error(err);
@@ -62,6 +60,7 @@ const AuthProvider = ({ children }) => {
             }
         } catch (err) {
             console.error("Erreur lors de la connexion :", err);
+            return { status: 500, message: "Internal Server Error Bad credential" };
         }
     };
 

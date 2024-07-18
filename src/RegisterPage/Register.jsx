@@ -1,7 +1,7 @@
 import './Register.css';
 import {Button, TextField} from "@mui/material";
 import {useState} from "react";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 export function Register(){
     const[userName, setUsername] = useState("")
@@ -83,9 +83,45 @@ export function Register(){
                             <TextField
                                 id="outlined-basic"
                                 className="input"
+                                label="Nom :"
+                                value={familyName}
+                                onChange={event => setFamilyName(event.target.value)}
+                            />
+                        </div>
+                        <div className={"container-input"}>
+                            <TextField
+                                id="outlined-basic"
+                                className="input"
+                                label="Email :"
+                                value={email}
+                                onChange={event => setEmail(event.target.value)}
+                            />
+                        </div>
+                        <div className={"container-input"}>
+                            <TextField
+                                id="outlined-basic"
+                                className="input"
                                 label="Téléphone :"
                                 value={phone}
                                 onChange={event => setPhone(event.target.value)}
+                            />
+                        </div>
+                        <div className={"container-input"}>
+                            <TextField
+                                id="outlined-basic"
+                                className="input"
+                                label="Rue :"
+                                value={address}
+                                onChange={event => setAddress(event.target.value)}
+                            />
+                        </div>
+                        <div className={"container-input"}>
+                            <TextField
+                                id="outlined-basic"
+                                className="input"
+                                label="Ville :"
+                                value={city}
+                                onChange={event => setCity(event.target.value)}
                             />
                         </div>
                         <div className={"container-input"}>
@@ -109,42 +145,6 @@ export function Register(){
                         </div>
                         <div className={"container-input"}>
                             <TextField
-                                id="outlined-basic"
-                                className="input"
-                                label="Nom :"
-                                value={familyName}
-                                onChange={event => setFamilyName(event.target.value)}
-                            />
-                        </div>
-                        <div className={"container-input"}>
-                            <TextField
-                                id="outlined-basic"
-                                className="input"
-                                label="Email :"
-                                value={email}
-                                onChange={event => setEmail(event.target.value)}
-                            />
-                        </div>
-                        <div className={"container-input"}>
-                            <TextField
-                                id="outlined-basic"
-                                className="input"
-                                label="Rue :"
-                                value={address}
-                                onChange={event => setAddress(event.target.value)}
-                            />
-                        </div>
-                        <div className={"container-input"}>
-                            <TextField
-                                id="outlined-basic"
-                                className="input"
-                                label="Ville :"
-                                value={city}
-                                onChange={event => setCity(event.target.value)}
-                            />
-                        </div>
-                        <div className={"container-input"}>
-                            <TextField
                                 id="outlined-password-input"
                                 className="input"
                                 label="Confirmation :"
@@ -159,7 +159,7 @@ export function Register(){
                             </Button>
                         </div>
                         <div className={"container-button-cancel"}>
-                            <Button className="button" variant="contained">Annuler</Button>
+                            <Button className="button" variant="contained" component={Link} to="http://localhost:5173/auth/login">Annuler</Button>
                         </div>
                     </form>
                 </div>

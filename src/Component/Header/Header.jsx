@@ -3,6 +3,7 @@ import {Button} from "@mui/material";
 import {Link, useNavigate} from "react-router-dom";
 import {AuthContext, useAuth} from "../../Context/AuthContext.jsx";
 import {useContext} from "react";
+import GavelIcon from '@mui/icons-material/Gavel';
 
 export function Header() {
 
@@ -24,7 +25,7 @@ export function Header() {
     return (
         <header className="header">
             <div className="logo">
-                <a href="/">Eni-Enchères</a>
+                <a href="/">Eni-Enchères <GavelIcon/></a>
             </div>
             {isLoggedIn() ?
                 <div className="user-profile">

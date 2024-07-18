@@ -2,7 +2,7 @@ import {Button} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import {AuthContext} from "../Context/AuthContext.jsx";
 import {useContext} from "react";
-
+import "./UserProfile.css"
 
 export function UserProfile(){
     const { user } = useContext(AuthContext);
@@ -25,7 +25,7 @@ export function UserProfile(){
             <p>Code postal: {user.postalCode}</p>
             <p>Ville: {user.city}</p>
         <div>
-            <Button variant="contained" onClick={handleClick}>Modifier</Button>
+            <Button variant="contained" onClick={handleClick} style={{top: "40px", width: "175px", height: "40px"}}>Modifier</Button>
         </div>
         </div>
     )
