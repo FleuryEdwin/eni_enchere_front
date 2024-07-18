@@ -157,19 +157,20 @@ export function UserProfileEdit() {
                                 onChange={event => setConfirmPassword(event.target.value)}
                             />
                         </div>*/}
-                        <p>Crédit: </p>
-                        <div className={"container-button-cancel"}>
+                        <p>Crédit: {user.credit}</p>
+                        <div className={"container-button-delete"}>
                             <Button
                                 className="button"
                                 variant="outlined"
                                 color="error"
                                 startIcon={<DeleteIcon/>}
+                                style={{top:"75px"}}
                             >
                                 Supprimer mon compte
                             </Button>
                         </div>
                         <div className={"container-button-confirm"}>
-                            <Button className="button" variant="contained" type="submit">
+                            <Button className="button-delete" variant="contained" type="submit">
                                 Enregistrer
                             </Button>
                         </div>

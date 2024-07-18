@@ -3,6 +3,7 @@ import {Button} from "@mui/material";
 import {Link, useNavigate} from "react-router-dom";
 import {AuthContext, useAuth} from "../../Context/AuthContext.jsx";
 import {useContext} from "react";
+import GavelIcon from '@mui/icons-material/Gavel';
 
 export function Header() {
 
@@ -24,14 +25,14 @@ export function Header() {
     return (
         <header className="header">
             <div className="logo">
-                <a href="/">Eni-Enchères</a>
+                <a href="/">Eni-Enchères <GavelIcon/></a>
             </div>
             {isLoggedIn() ?
                 <div className="user-profile">
-                    <Button component={Link} to="/auth/login">
+                    <Button style={{color:"white"}} component={Link} to="/auth/login">
                         Enchères
                     </Button>
-                    <Button component={Link} to="/product/add">
+                    <Button style={{color:"white"}} component={Link} to="/product/add">
                         Vendre un article
                     </Button>
                     <Button style={{color:"white"}} onClick={handleClick}>
@@ -42,7 +43,8 @@ export function Header() {
                     </Button>
                 </div>
                 :
-                <div className="user-profilee">
+
+                <div className="user-profile">
                     <Button style={{color:"white"}} component={Link} to="/auth/login">
                         Login
                     </Button>
