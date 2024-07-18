@@ -14,7 +14,7 @@ import {AuthContext} from "../../Context/AuthContext.jsx";
 
 const ProductAdd = () => {
     const navigate = useNavigate();
-    const {user} = useContext(AuthContext);
+    const {user,token} = useContext(AuthContext);
 
     const [nameProduct, setNameProduct] = useState('');
     const [descriptionProduct, setDescriptionProduct] = useState('');
@@ -63,13 +63,18 @@ const ProductAdd = () => {
         try {
             const response = await fetch('http://localhost:8080/products/add', {
                 method: 'POST',
-                headers: {'Content-Type': 'application/json'},
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`
+                },
                 body: JSON.stringify(newProduct),
             });
+
 
             if (response.ok) {
                 navigate('/?productAdded=true');
             } else {
+                console.log(newProduct)
                 setMessage('Erreur lors de l\'ajout du produit');
             }
         } catch (error) {

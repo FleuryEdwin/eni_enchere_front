@@ -2,10 +2,12 @@ import {Button, Input, InputAdornment, InputLabel, MenuItem, Select} from "@mui/
 import SearchIcon from "@mui/icons-material/Search";
 import {useEffect, useState} from "react";
 import "./Auction.css"
+import {useNavigate} from "react-router-dom";
 export function ProductList() {
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetch('http://localhost:8080/categories')
@@ -38,7 +40,9 @@ export function ProductList() {
                 .catch(error => console.error('Error fetching products:', error));
         }
     };
-
+    const handleProductClick = (productId) => {
+        navigate(`/products/${productId}/detail`);
+    };
     return (
         <div className="home">
             <div className={"search"}>
@@ -75,9 +79,9 @@ export function ProductList() {
             </div>
             <div style={{display:"flex", flexWrap:"wrap",justifyContent:'center'}}>
                 {products.map((product) => (
-                    <div className="box" key={product.idProduct}>
+                    <div className="box" key={product.idProduct} onClick={() => handleProductClick(product.idProduct)}>
                         <div className="photo">
-                            <img style={{ borderRadius: 25 }} src={product.urlImg} alt="Photo" />
+                        <img style={{ borderRadius: 25 }} src={product.urlImg} alt="Photo" />
                         </div>
                         <div className="description">
                             <h3>{product.nameProduct}</h3>

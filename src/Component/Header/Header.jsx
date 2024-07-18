@@ -43,7 +43,7 @@ export function Header() {
                 </div>
                 :
                 <div className="user-profilee">
-                    <Button component={Link} to="/auth/login">
+                    <Button style={{color:"white"}} component={Link} to="/auth/login">
                         Login
                     </Button>
                 </div>}

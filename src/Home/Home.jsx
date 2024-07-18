@@ -1,8 +1,5 @@
 import './Home.css';
 import '../EnchereHome.css';
-import { Button, Input, InputAdornment, InputLabel, Select, MenuItem } from "@mui/material";
-import { useContext, useEffect, useState } from "react";
-import SearchIcon from '@mui/icons-material/Search';
 import { ProductList } from "../Component/Products/ProductList.jsx";
 import { useLocation } from "react-router-dom";
 
@@ -15,8 +12,8 @@ export function Home() {
 
 
     return (
-        <div>
-            {productAdded && <div>Le produit a été ajouté avec succès !</div>}
+        <div style={{display:"flex", justifyContent:"center", flexDirection:"column"}}>
+            {productAdded && <div style={{color:"green"}}>Le produit a été ajouté avec succès !</div>}
 
             <div className={"flex-box"}>
                 <ProductList />

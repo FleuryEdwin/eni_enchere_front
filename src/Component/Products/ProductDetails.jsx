@@ -7,13 +7,17 @@ export function ProductDetails() {
     const { id } = useParams();
     const [product, setProduct] = useState(null);
     const [offer, setOffer] = useState("");
-    const { getUser, user } = useContext(AuthContext);
+    const { getUser, user ,token} = useContext(AuthContext);
     const navigate = useNavigate();
 
     useEffect(() => {
         const fetchProduct = async () => {
             try {
-                const response = await fetch(`http://localhost:8080/products/${id}`);
+                const response = await fetch(`http://localhost:8080/products/${id}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
                 if (response.ok) {
                     const data = await response.json();
                     setProduct(data);
