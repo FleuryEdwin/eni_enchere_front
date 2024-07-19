@@ -24,7 +24,7 @@ main{
 .header {
     height: 10vh;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     background-color: steelblue;
     padding: 5px 20px;
@@ -41,6 +41,7 @@ main{
 .nav ul {
     list-style: none;
     display: flex;
+    justify-content: space-between;
     gap: 15px;
     margin: 0;
     padding: 0;
@@ -51,10 +52,14 @@ main{
     color: white;
 }
 
-.user-profile a {
+.user-profile {
+    display: flex;
     text-decoration: none;
+    gap: 10px;
     color: white;
-    padding-right: 50px;
 }
 
+.user-name {
+    padding-bottom: 5px;
+}
 

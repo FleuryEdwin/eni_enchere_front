@@ -3,6 +3,7 @@ import {useContext, useEffect, useState} from "react";
 import {AuthContext} from "../Context/AuthContext.jsx";
 import DeleteIcon from '@mui/icons-material/Delete';
 import {useNavigate} from "react-router-dom";
+import './UserProfileEdit.css'
 
 export function UserProfileEdit() {
     const { user, updateUser, token } = useContext(AuthContext);
@@ -67,6 +68,28 @@ export function UserProfileEdit() {
             }
         } catch (error) {
             console.error("Erreur lors de la modification de l'utilisateur :", error);
+        }
+    }
+
+    const handleDelete = async (event) =>{
+        event.preventDefault()
+        const idUser = user.idUser
+
+        try {
+            const response = await fetch(`http://localhost:8080/users/${idUser}/delete`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+            if (response.ok) {
+                console.log("Utilisateur supprimé avec succès");
+                navigate(`/`);
+            } else {
+                console.error("Échec de la suppression de l'utilisateur");
+            }
+        } catch (error) {
+            console.error("Erreur lors de la suppression de l'utilisateur :", error);
         }
     }
 
@@ -166,6 +189,7 @@ export function UserProfileEdit() {
                                 color="error"
                                 startIcon={<DeleteIcon/>}
                                 style={{top:"75px"}}
+                                onClick={handleDelete}
                             >
                                 Supprimer mon compte
                             </Button>

@@ -7,7 +7,10 @@ import GavelIcon from '@mui/icons-material/Gavel';
 
 export function Header() {
 
+    const auth = useAuth()
+
     const { getUser, user } = useContext(AuthContext);
+    console.log(user)
 
     const navigate = useNavigate()
 
@@ -20,8 +23,6 @@ export function Header() {
         navigate(`/users/${idUser}/profile`);
     };
 
-    console.log("user 1 : ", user)
-    const auth = useAuth()
 
     return (
         <header className="header">
@@ -42,6 +43,7 @@ export function Header() {
                     <Button style={{color:"white"}} onClick={() => auth.logout()}>
                         Déconnexion
                     </Button>
+                    <p className="user-name">{user?.username}: {user?.credit} crédit</p>
                 </div>
                 :
 
