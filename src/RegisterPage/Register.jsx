@@ -2,8 +2,10 @@ import './Register.css';
 import {Button, TextField} from "@mui/material";
 import {useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
+import {useAuth} from "../Context/AuthContext.jsx";
 
 export function Register(){
+    const [pseudo, setPseudo] = useState("")
     const[userName, setUsername] = useState("")
     const[firstName, setFirstName] = useState("")
     const[phone, setPhone] = useState("")
@@ -29,10 +31,13 @@ export function Register(){
 
     const navigate = useNavigate()
 
+    const auth = useAuth()
+
     const handleSubmit = async (event) => {
         event.preventDefault()
 
         const userData = {
+            pseudo,
             userName,
             firstName,
             familyName,
@@ -83,8 +88,8 @@ export function Register(){
                                 label="Pseudo :"
                                 error={errors.username}
                                 helperText={errors.userName ? "Invalid first name" : ""}
-                                value={userName}
-                                onChange={event => setUsername(event.target.value)}
+                                value={pseudo}
+                                onChange={event => setPseudo(event.target.value)}
                             />
                         </div>
                         <div className={"container-input"}>

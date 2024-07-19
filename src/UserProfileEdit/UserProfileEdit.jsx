@@ -3,6 +3,7 @@ import {useContext, useEffect, useState} from "react";
 import {AuthContext} from "../Context/AuthContext.jsx";
 import DeleteIcon from '@mui/icons-material/Delete';
 import {useNavigate} from "react-router-dom";
+import {useAuth} from "../Context/AuthContext.jsx";
 import './UserProfileEdit.css'
 
 export function UserProfileEdit() {
@@ -18,6 +19,8 @@ export function UserProfileEdit() {
     const[address, setAddress] = useState("")
     const[city, setCity] = useState("")
     //const[confirmPassword, setConfirmPassword] = useState("")
+
+    const auth = useAuth()
 
     useEffect(() => {
         if (user) {
@@ -80,11 +83,13 @@ export function UserProfileEdit() {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
                 },
             });
             if (response.ok) {
                 console.log("Utilisateur supprimé avec succès");
                 navigate(`/`);
+                auth.logout()
             } else {
                 console.error("Échec de la suppression de l'utilisateur");
             }

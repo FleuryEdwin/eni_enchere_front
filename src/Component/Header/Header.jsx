@@ -10,7 +10,6 @@ export function Header() {
     const auth = useAuth()
 
     const { getUser, user } = useContext(AuthContext);
-    console.log(user)
 
     const navigate = useNavigate()
 
