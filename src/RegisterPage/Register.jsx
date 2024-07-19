@@ -50,6 +50,11 @@ export function Register(){
             country,
         }
 
+        const userDataLogin ={
+            email,
+            password,
+        }
+
         console.log(userData)
 
         try {
@@ -62,6 +67,7 @@ export function Register(){
             });
             if (response.ok) {
                 console.log("Utilisateur enregistré avec succès");
+                auth.loginAction(userDataLogin)
                 navigate("/")
             } else if (response.status === 400) {
                 console.error("Échec de l'enregistrement de l'utilisateur");

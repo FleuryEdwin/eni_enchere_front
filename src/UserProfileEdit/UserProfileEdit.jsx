@@ -9,7 +9,7 @@ import './UserProfileEdit.css'
 export function UserProfileEdit() {
     const { user, updateUser, token } = useContext(AuthContext);
 
-    const[username, setUsername] = useState("")
+    const[pseudo, setPseudo] = useState("")
     const[firstName, setFirstName] = useState("")
     const[phone, setPhone] = useState("")
     const[postalCode, setPostalCode] = useState("")
@@ -24,7 +24,7 @@ export function UserProfileEdit() {
 
     useEffect(() => {
         if (user) {
-            setUsername(user.username);
+            setPseudo(user.pseudo);
             setFirstName(user.firstName);
             setPhone(user.phone);
             setPostalCode(user.postalCode);
@@ -42,7 +42,7 @@ export function UserProfileEdit() {
 
         const idUser = user.idUser
         const userProfileData = {
-            username,
+            pseudo,
             firstName,
             phone,
             postalCode,
@@ -108,8 +108,8 @@ export function UserProfileEdit() {
                             <TextField
                                 className="input"
                                 label="Pseudo :"
-                                value={username}
-                                onChange={event => setUsername(event.target.value)}
+                                value={pseudo}
+                                onChange={event => setPseudo(event.target.value)}
                             />
                         </div>
                         <div className={"container-input"}>

@@ -16,7 +16,7 @@ export function UserProfile(){
 
     return(
         <div className="Profile">
-            <p>Pseudo: {user.username}</p>
+            <p>Pseudo: {user.pseudo}</p>
             <p>Nom: {user.familyName}</p>
             <p>Prénom: {user.firstName}</p>
             <p>Email: {user.email}</p>

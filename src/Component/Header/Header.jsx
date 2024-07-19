@@ -42,7 +42,7 @@ export function Header() {
                     <Button style={{color:"white"}} onClick={() => auth.logout()}>
                         Déconnexion
                     </Button>
-                    <p className="user-name">{user?.username}: {user?.credit} crédit</p>
+                    <p className="user-name">{user?.pseudo}: {user?.credit} crédit</p>
                 </div>
                 :
 
