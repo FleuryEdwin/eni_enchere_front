@@ -20,6 +20,7 @@ export function Header() {
         navigate(`/users/${idUser}/profile`);
     };
 
+    console.log("user 1 : ", user)
     const auth = useAuth()
 
     return (

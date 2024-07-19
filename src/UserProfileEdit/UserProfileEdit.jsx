@@ -5,7 +5,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import {useNavigate} from "react-router-dom";
 
 export function UserProfileEdit() {
-    const { user, updateUser } = useContext(AuthContext);
+    const { user, updateUser, token } = useContext(AuthContext);
 
     const[username, setUsername] = useState("")
     const[firstName, setFirstName] = useState("")
@@ -54,6 +54,7 @@ export function UserProfileEdit() {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
                 },
                 body: JSON.stringify(userProfileData),
             });
