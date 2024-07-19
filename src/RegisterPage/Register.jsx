@@ -15,6 +15,17 @@ export function Register(){
     const[city, setCity] = useState("")
     const[confirmPassword, setConfirmPassword] = useState("")
     const country = "test"
+    const [errors, setErrors] = useState({
+        userName: false,
+        firstName: false,
+        phone: false,
+        postalCode: false,
+        password: false,
+        familyName: false,
+        email: false,
+        address: false,
+        city: false,
+    })
 
     const navigate = useNavigate()
 
@@ -47,8 +58,12 @@ export function Register(){
             if (response.ok) {
                 console.log("Utilisateur enregistré avec succès");
                 navigate("/")
-            } else {
+            } else if (response.status === 400) {
                 console.error("Échec de l'enregistrement de l'utilisateur");
+                const errorData = await response.json();
+                console.log(errorData)
+            } else {
+                console.error("Erreur lors de l'enregistrement de l'utilisateur");
             }
         } catch (error) {
             console.error("Erreur lors de l'enregistrement de l'utilisateur :", error);
@@ -66,6 +81,8 @@ export function Register(){
                                 id="outlined-basic"
                                 className="input"
                                 label="Pseudo :"
+                                error={errors.username}
+                                helperText={errors.userName ? "Invalid first name" : ""}
                                 value={userName}
                                 onChange={event => setUsername(event.target.value)}
                             />
@@ -75,6 +92,8 @@ export function Register(){
                                 id="outlined-basic"
                                 className="input"
                                 label="Prénom :"
+                                error={errors.firstName}
+                                helperText={errors.firstName ? "Invalid first name" : ""}
                                 value={firstName}
                                 onChange={event => setFirstName(event.target.value)}
                             />
@@ -84,6 +103,8 @@ export function Register(){
                                 id="outlined-basic"
                                 className="input"
                                 label="Nom :"
+                                error={errors.familyName}
+                                helperText={errors.familyName ? "Invalid first name" : ""}
                                 value={familyName}
                                 onChange={event => setFamilyName(event.target.value)}
                             />
@@ -93,6 +114,8 @@ export function Register(){
                                 id="outlined-basic"
                                 className="input"
                                 label="Email :"
+                                error={errors.email}
+                                helperText={errors.email ? "Invalid first name" : ""}
                                 value={email}
                                 onChange={event => setEmail(event.target.value)}
                             />
@@ -102,6 +125,8 @@ export function Register(){
                                 id="outlined-basic"
                                 className="input"
                                 label="Téléphone :"
+                                error={errors.phone}
+                                helperText={errors.phone ? "Invalid first name" : ""}
                                 value={phone}
                                 onChange={event => setPhone(event.target.value)}
                             />
@@ -111,6 +136,8 @@ export function Register(){
                                 id="outlined-basic"
                                 className="input"
                                 label="Rue :"
+                                error={errors.address}
+                                helperText={errors.address ? "Invalid first name" : ""}
                                 value={address}
                                 onChange={event => setAddress(event.target.value)}
                             />
@@ -120,6 +147,8 @@ export function Register(){
                                 id="outlined-basic"
                                 className="input"
                                 label="Ville :"
+                                error={errors.city}
+                                helperText={errors.city ? "Invalid first name" : ""}
                                 value={city}
                                 onChange={event => setCity(event.target.value)}
                             />
@@ -129,6 +158,8 @@ export function Register(){
                                 id="outlined-basic"
                                 className="input"
                                 label="Code postal :"
+                                error={errors.postalCode}
+                                helperText={errors.postalCode ? "Invalid first name" : ""}
                                 value={postalCode}
                                 onChange={event => setPostalCode(event.target.value)}
                             />
@@ -139,6 +170,8 @@ export function Register(){
                                 className="input"
                                 label="Mot de passe :"
                                 type="password"
+                                error={errors.password}
+                                helperText={errors.password ? "Invalid first name" : ""}
                                 value={password}
                                 onChange={event => setPassword(event.target.value)}
                             />
